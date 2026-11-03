@@ -1,0 +1,7 @@
+dinosaur
+dinosaur.exe
+*.o
+*.out
+.DS_Store
+.vscode/
+.idea/

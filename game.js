@@ -12,9 +12,10 @@
   let best = Number(localStorage.getItem(BEST_KEY) || 0);
   bestEl.textContent = String(best);
 
-  const GROUND_Y = 260;
+  const GROUND_Y = 220;
   const GRAVITY = 0.55;
   const JUMP_VELOCITY = -13.5;
+  const INK = "#535353";
 
   const dinoArt = [
     "            ___",
@@ -101,9 +102,9 @@
       localStorage.setItem(BEST_KEY, String(best));
       bestEl.textContent = String(best);
     }
-    overlayTitle.textContent = "Game Over!";
-    overlayMsg.textContent = `Final score: ${score}. Press Start or Space to try again.`;
-    startBtn.textContent = "Play Again";
+    overlayTitle.textContent = "Game Over";
+    overlayMsg.textContent = `Score ${score} — space to retry`;
+    startBtn.textContent = "Retry";
     overlay.classList.remove("hidden");
   }
 
@@ -175,39 +176,25 @@
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Soft hills
-    ctx.fillStyle = "rgba(120, 160, 120, 0.25)";
+    // Ground line
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.ellipse(180, GROUND_Y + 10, 140, 36, 0, 0, Math.PI * 2);
-    ctx.ellipse(520, GROUND_Y + 16, 180, 44, 0, 0, Math.PI * 2);
-    ctx.ellipse(780, GROUND_Y + 8, 120, 30, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Ground
-    ctx.strokeStyle = "#3d3429";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(0, GROUND_Y + 2);
-    ctx.lineTo(canvas.width, GROUND_Y + 2);
+    ctx.moveTo(0, GROUND_Y + 1);
+    ctx.lineTo(canvas.width, GROUND_Y + 1);
     ctx.stroke();
 
-    // Moving dashes on ground
-    ctx.fillStyle = "#8a734f";
-    const offset = (frame * speed) % 40;
-    for (let x = -offset; x < canvas.width; x += 40) {
-      ctx.fillRect(x, GROUND_Y + 8, 18, 3);
+    // Sparse ground ticks
+    const offset = (frame * speed) % 28;
+    ctx.fillStyle = INK;
+    for (let x = -offset; x < canvas.width; x += 28) {
+      ctx.fillRect(x, GROUND_Y + 4, 2, 2);
     }
 
-    drawAscii(dinoArt, dino.x, dino.y, "#2a3d2e", 13);
+    drawAscii(dinoArt, dino.x, dino.y, INK, 13);
 
     for (const c of cacti) {
-      drawAscii(cactusArt, c.x, c.y, "#1f5c3a", 14);
-    }
-
-    if (state === "playing") {
-      ctx.fillStyle = "#3d3429";
-      ctx.font = 'bold 16px "Segoe UI", sans-serif';
-      ctx.fillText(`Score ${score}`, canvas.width - 110, 28);
+      drawAscii(cactusArt, c.x, c.y, INK, 14);
     }
   }
 

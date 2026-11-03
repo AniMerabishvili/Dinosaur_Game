@@ -9,24 +9,24 @@
 <body>
   <main class="shell">
     <header class="top">
-      <h1>Dinosaur Game</h1>
-      <p>Press <kbd>Space</kbd> / <kbd>↑</kbd> or tap to jump</p>
+      <h1>Dinosaur</h1>
+      <p>Space / ↑ jump</p>
     </header>
 
     <div class="stage-wrap">
-      <canvas id="game" width="900" height="320" aria-label="Dinosaur runner game"></canvas>
+      <canvas id="game" width="900" height="280" aria-label="Dinosaur runner game"></canvas>
       <div id="overlay" class="overlay">
         <div class="panel">
-          <h2 id="overlay-title">Ready?</h2>
-          <p id="overlay-msg">Jump over the cacti. Survive as long as you can.</p>
-          <button id="start-btn" type="button">Start Game</button>
+          <h2 id="overlay-title">Ready</h2>
+          <p id="overlay-msg">Press start or space</p>
+          <button id="start-btn" type="button">Start</button>
         </div>
       </div>
     </div>
 
     <footer class="hud">
-      <span>Score: <strong id="score">0</strong></span>
-      <span>Best: <strong id="best">0</strong></span>
+      <span>HI <strong id="best">0</strong></span>
+      <span><strong id="score">0</strong></span>
     </footer>
   </main>
   <script src="game.js"></script>
